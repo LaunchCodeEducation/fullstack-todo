@@ -1,22 +1,20 @@
-function Model() {
-  // mock data store
+function ToDo(text, id) {
+  this.id = id;
+  this.text = text;
+  this.completed = false;
+
+  this.setComplete = () => {
+    console.log(this);
+    this.completed = true;
+  };
+}
+
+module.exports = function DataHandler() {
   const store = {
     nextId: 0, // "auto-incrementing" id
     items: [], // stored items
   };
 
-  // private constructor
-  function ToDo(text, id) {
-    this.id = id;
-    this.text = text;
-    this.completed = false;
-
-    this.setComplete = function() {
-      this.completed = true;
-    };
-  }
-
-  //-- public CRUD methods --//
   this.getItems = () => store.items;
 
   this.addItem = itemText => {
@@ -41,4 +39,4 @@ function Model() {
   this.deleteItem = itemId => {
     store.items = store.items.filter(item => item.id !== Number(itemId));
   };
-}
+};
