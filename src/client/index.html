@@ -4,7 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <script src="scripts/index.js"></script>
+    <script src="scripts/utils.js"></script>
+    <script src="scripts/model.js"></script>
+    <script src="scripts/view.js"></script>
+    <script src="scripts/controller.js"></script>
+    <script src="scripts/init.js"></script>
     <title>FullStack ToDo</title>
   </head>
   <body>
@@ -12,20 +16,12 @@
     <article>
       <section>
         <h2>Incomple Items</h2>
-        <ul id="incomplete-items">
-          <li>First item <button id="item-4">[✓]</button></li>
-          <li>Second item <button id="item-5">[✓]</button></li>
-          <li>Third item <button id="item-6">[✓]</button></li>
-        </ul>
+        <ul id="incomplete-list"></ul>
       </section>
 
       <section>
         <h2>Completed Items</h2>
-        <ul id="completed-items">
-          <li>First completed item <button id="item-1">[✘]</button></li>
-          <li>Second completed item <button id="item-2">[✘]</button></li>
-          <li>Third completed item <button id="item-3">[✘]</button></li>
-        </ul>
+        <ul id="completed-list"></ul>
       </section>
 
       <section>
@@ -33,13 +29,9 @@
         <form id="new-todo-form">
           <label for="todo-text">item description</label>
           <input type="text" name="text" id="todo-text" />
-          <input type="submit" value="Create" />
+          <input type="submit" id="create-item-button" value="Create" />
         </form>
       </section>
     </article>
-
-    <footer>
-      Created by <a href="http://github.com/the-vampiire">Vamp</a>
-    </footer>
   </body>
 </html>
