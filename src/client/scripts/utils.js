@@ -1,4 +1,8 @@
-const buildButton = (id, text, classes = "") => {
+const buildButton = (
+  id,
+  text,
+  classes = "mui-btn mui-btn--small mui-btn--primary mui-btn--fab",
+) => {
   const button = document.createElement("button");
 
   button.id = id;
@@ -8,16 +12,22 @@ const buildButton = (id, text, classes = "") => {
   return button;
 };
 
-const buildListItem = (text, classes = "") => {
+const buildListItem = (
+  text,
+  classes = "mui-panel mui--text-dark mui--text-display1",
+) => {
   const listItem = document.createElement("li");
-
-  listItem.innerText = text;
   listItem.className = classes;
 
+  const textSpan = document.createElement("span");
+  textSpan.classList.add("item-text");
+  textSpan.innerText = text;
+
+  listItem.appendChild(textSpan);
   return listItem;
 };
 
-const buildItemButtonText = item => `[${item.completed ? "✘" : "✓"}]`;
+const buildItemButtonText = item => `${item.completed ? "✘" : "✓"}`;
 
 const configureItemButtonAction = (item, itemButton) =>
   itemButton.setAttribute(
@@ -37,13 +47,14 @@ const buildItemButton = (item, clickHandler) => {
 
 const updateItemButton = (item, itemButton) => {
   itemButton.innerText = buildItemButtonText(item);
+  itemButton.classList.replace("mui-btn--primary", "mui-btn--danger");
   configureItemButtonAction(item, itemButton);
 };
 
 const buildItemComponent = (item, clickHandler) => {
   const listItem = buildListItem(item.text);
   const itemButton = buildItemButton(item, clickHandler);
-  listItem.appendChild(itemButton);
+  listItem.insertAdjacentElement("afterbegin", itemButton);
 
   return listItem;
 };
