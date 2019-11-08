@@ -4,34 +4,66 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <!-- MUI CSS framework -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.muicss.com/mui-0.10.0/css/mui.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.muicss.com/mui-0.10.0/js/mui.min.js"></script>
+
+    <!-- scripts -->
     <script src="scripts/utils.js"></script>
     <script src="scripts/model.js"></script>
     <script src="scripts/view.js"></script>
     <script src="scripts/controller.js"></script>
     <script src="scripts/init.js"></script>
+
     <title>FullStack ToDo</title>
   </head>
   <body>
-    <h1>FullStack ToDo</h1>
-    <article>
-      <section>
-        <h2>Incomple Items</h2>
-        <ul id="incomplete-list"></ul>
-      </section>
+    <div class="mui-container">
+      <article>
+        <section class="mui-appbar">
+          <h2
+            class="mui--appbar-height mui--appbar-line-height mui--text-center mui--align-middle"
+          >
+            ToDo
+          </h2>
+          <ul class="mui-list--unstyled" id="incomplete-list">
+            <li class="mui-panel mui--text-center">
+              <form class="mui-form" id="new-todo-form">
+                <div class="mui-textfield create-item-input">
+                  <input
+                    class="create-item-input-text"
+                    type="text"
+                    name="text"
+                    id="todo-text"
+                    placeholder="enter a todo"
+                  />
+                </div>
+                <input
+                  type="submit"
+                  value="Create"
+                  class="mui-btn mui-btn--primary mui-btn--large"
+                  id="create-item-button"
+                />
+              </form>
+            </li>
+          </ul>
+        </section>
 
-      <section>
-        <h2>Completed Items</h2>
-        <ul id="completed-list"></ul>
-      </section>
-
-      <section>
-        <h2>Create a ToDo</h2>
-        <form id="new-todo-form">
-          <label for="todo-text">item description</label>
-          <input type="text" name="text" id="todo-text" />
-          <input type="submit" id="create-item-button" value="Create" />
-        </form>
-      </section>
-    </article>
+        <section class="mui-appbar">
+          <h2
+            class="mui--appbar-height mui--appbar-line-height mui--text-center mui--align-middle"
+          >
+            Completed
+          </h2>
+          <ul class="mui-list--unstyled" id="completed-list"></ul>
+        </section>
+      </article>
+    </div>
   </body>
 </html>
