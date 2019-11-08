@@ -21,7 +21,9 @@ function View(controller) {
   //-- ACTIONS --//
   const addNewItem = clickHandler => {
     const newItemText = createItemTextInput.value;
-    createItemTextInput.value = "";
+    if (!newItemText) return; // exit early if text is empty
+
+    createItemTextInput.value = ""; // reset input value
 
     const newItem = controller.handleCreateItem(newItemText);
     const itemComponent = buildItemComponent(newItem, clickHandler);
