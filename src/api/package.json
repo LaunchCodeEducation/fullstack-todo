@@ -1,0 +1,26 @@
+{
+  "name": "todo-fullstack-api",
+  "version": "0.0.1",
+  "description": "simple todo full stack backend",
+  "main": "index.js",
+  "scripts": {
+    "start": "node .",
+    "dev": "nodemon ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/gis-devops-6/patrick-full-stack-js.git"
+  },
+  "author": "the-vampiire",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://gitlab.com/gis-devops-6/patrick-full-stack-js/issues"
+  },
+  "homepage": "https://gitlab.com/gis-devops-6/patrick-full-stack-js#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.4"
+  }
+}
