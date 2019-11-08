@@ -1,8 +1,25 @@
 const express = require("express");
 
+const {
+  getToDosHandler,
+  createToDoHandler,
+  completeToDoHandler,
+  deleteToDoHandler,
+} = require("./route-handlers");
+const DataHandler = require("./data-handler");
+const { allowCORS, enforceJSON, injectDataHandler } = require("./middleware");
+
 const app = express();
 
-app.use(express.json());
+app.use(allowCORS, injectDataHandler(new DataHandler()));
 
-const port = process.env.PORT || 8008;
-app.listen(port, () => console.log(`API listening on port ${port}`));
+app.get("/todos", getToDosHandler);
+
+app.post("/todos", enforceJSON, express.json(), createToDoHandler);
+
+app.patch("/todos/:id", completeToDoHandler);
+
+app.delete("/todos/:id", deleteToDoHandler);
+
+const { PORT = 8008 } = process.env;
+app.listen(PORT, () => console.log(`app server listening on ${PORT}`));
