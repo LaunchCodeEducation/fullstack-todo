@@ -5,6 +5,8 @@ function View(controller) {
   const completedList = document.querySelector("#completed-list");
   const incompleteList = document.querySelector("#incomplete-list");
 
+  const handleError = error => console.error({ error });
+
   //-- UTILS --//
   const getItemComponent = itemButton => itemButton.parentElement;
 
@@ -23,30 +25,35 @@ function View(controller) {
     const newItemText = createItemTextInput.value;
     if (!newItemText) return; // exit early if text is empty
 
-    createItemTextInput.value = ""; // reset input value
+    controller
+      .handleCreateItem(newItemText)
+      .then(newItem => {
+        createItemTextInput.value = ""; // reset input value
 
-    const newItem = controller.handleCreateItem(newItemText);
-    const itemComponent = buildItemComponent(newItem, clickHandler);
-
-    appendItemToList(itemComponent, incompleteList);
+        const itemComponent = buildItemComponent(newItem, clickHandler);
+        appendItemToList(itemComponent, incompleteList);
+      })
+      .catch(handleError);
   };
 
-  const moveItemToCompletedList = itemButton => {
-    const updatedItem = controller.handleCompleteItem(itemButton.id);
-    updateItemButton(updatedItem, itemButton);
+  const moveItemToCompletedList = itemButton =>
+    controller
+      .handleCompleteItem(itemButton.id)
+      .then(updatedItem => {
+        updateItemButton(updatedItem, itemButton);
 
-    const itemComponent = getItemComponent(itemButton);
-    appendItemToList(itemComponent, completedList);
-  };
+        const itemComponent = getItemComponent(itemButton);
+        appendItemToList(itemComponent, completedList);
+      })
+      .catch(handleError);
 
-  const removeItem = itemButton => {
-    controller.handleDeleteItem(itemButton.id);
+  const removeItem = itemButton =>
+    controller
+      .handleDeleteItem(itemButton.id)
+      .then(() => getItemComponent(itemButton).remove())
+      .catch(handleError);
 
-    // removes item component node from DOM
-    getItemComponent(itemButton).remove();
-  };
-
-  //-- ACTION HANDLER --//
+  //-- HANDLERS --//
   const handleActionButtonClick = function(event) {
     const { target } = event; // the clicked button
 
@@ -66,9 +73,12 @@ function View(controller) {
   // all other functions are only accessible internally
   this.init = () => {
     configureCreateItemButton(createItemButton, handleActionButtonClick);
-
-    const items = controller.handleGetItems();
-    renderList(items.completed, completedList);
-    renderList(items.incomplete, incompleteList);
+    controller
+      .handleGetCurrentItems()
+      .then(items => {
+        renderList(items.completed, completedList);
+        renderList(items.incomplete, incompleteList);
+      })
+      .catch(handleError);
   };
 }
