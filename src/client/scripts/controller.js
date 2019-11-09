@@ -13,11 +13,8 @@ function Controller(model) {
       { completed: [], incomplete: [] },
     );
 
-  this.handleGetItems = () => {
-    const allItems = model.getItems();
-
-    return sortInitialItems(allItems);
-  };
+  this.handleGetCurrentItems = async () =>
+    model.getItems().then(sortInitialItems);
 
   this.handleCreateItem = todoText => model.addItem(todoText);
 
