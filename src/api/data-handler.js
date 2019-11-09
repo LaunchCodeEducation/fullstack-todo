@@ -4,7 +4,6 @@ function ToDo(text, id) {
   this.completed = false;
 
   this.setComplete = () => {
-    console.log(this);
     this.completed = true;
   };
 }
