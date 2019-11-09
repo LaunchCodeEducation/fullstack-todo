@@ -1,8 +1,4 @@
-const buildButton = (
-  id,
-  text,
-  classes = "mui-btn mui-btn--small mui-btn--primary mui-btn--fab",
-) => {
+const buildButton = (id, text, classes = "") => {
   const button = document.createElement("button");
 
   button.id = id;
@@ -27,6 +23,11 @@ const buildListItem = (
   return listItem;
 };
 
+const buildItemButtonStyle = item =>
+  `mui-btn mui-btn--small mui-btn--${
+    item.completed ? "danger" : "primary"
+  } mui-btn--fab`;
+
 const buildItemButtonText = item => `${item.completed ? "✘" : "✓"}`;
 
 const configureItemButtonAction = (item, itemButton) =>
@@ -37,7 +38,8 @@ const configureItemButtonAction = (item, itemButton) =>
 
 const buildItemButton = (item, clickHandler) => {
   const buttonText = buildItemButtonText(item);
-  const itemButton = buildButton(item.id, buttonText);
+  const buttonStyle = buildItemButtonStyle(item);
+  const itemButton = buildButton(item.id, buttonText, buttonStyle);
 
   itemButton.addEventListener("click", clickHandler);
   configureItemButtonAction(item, itemButton);
@@ -47,7 +49,7 @@ const buildItemButton = (item, clickHandler) => {
 
 const updateItemButton = (item, itemButton) => {
   itemButton.innerText = buildItemButtonText(item);
-  itemButton.classList.replace("mui-btn--primary", "mui-btn--danger");
+  itemButton.className = buildItemButtonStyle(item);
   configureItemButtonAction(item, itemButton);
 };
 
