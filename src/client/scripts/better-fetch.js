@@ -13,7 +13,11 @@ const betterFetch = async (url, options) => {
 
   if (!response.ok) {
     await handleFetchError(response);
+  } else if ([201, 204].includes(response.status)) {
+    // 201 and 204 are no-content responses do not try to parse the body
+    return true;
   }
+
   return await response.json();
 };
 
