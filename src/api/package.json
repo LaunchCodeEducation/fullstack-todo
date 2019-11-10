@@ -2,7 +2,7 @@
   "name": "todo-fullstack-api",
   "version": "0.0.1",
   "description": "simple todo full stack backend",
-  "main": "index.js",
+  "main": "src/",
   "scripts": {
     "start": "node .",
     "dev": "nodemon ."

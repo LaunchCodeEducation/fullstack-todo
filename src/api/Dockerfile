@@ -7,4 +7,4 @@ COPY . .
 # ignore dev dependency installation with production option
 RUN npm i --production 
 
-CMD node .
+CMD npm start
