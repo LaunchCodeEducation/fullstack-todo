@@ -1,11 +1,11 @@
 const getToDosHandler = (req, res) => {
-  const { dataHandler } = req;
-  return res.json(dataHandler.getItems());
+  const { model } = req;
+  return res.json(model.getItems());
 };
 
 const createToDoHandler = (req, res) => {
   const {
-    dataHandler,
+    model,
     body: { text },
   } = req;
 
@@ -17,18 +17,18 @@ const createToDoHandler = (req, res) => {
     });
   }
 
-  const newItem = dataHandler.addItem(text);
+  const newItem = model.addItem(text);
   return res.json(newItem);
 };
 
 const completeToDoHandler = (req, res) => {
   const {
-    dataHandler,
+    model,
     params: { id },
   } = req;
 
   try {
-    const completedItem = dataHandler.markItemComplete(id);
+    const completedItem = model.markItemComplete(id);
     return res.json(completedItem);
   } catch (error) {
     return res.status(400).json({
@@ -41,11 +41,11 @@ const completeToDoHandler = (req, res) => {
 
 const deleteToDoHandler = (req, res) => {
   const {
-    dataHandler,
+    model,
     params: { id },
   } = req;
 
-  dataHandler.deleteItem(id);
+  model.deleteItem(id);
   return res.sendStatus(204);
 };
 
