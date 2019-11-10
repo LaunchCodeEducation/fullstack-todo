@@ -1,4 +1,9 @@
-function Controller(model) {
+function Controller() {
+  const apiURL = "http://localhost:8008";
+  const baseEndpoint = `${apiURL}/todos`;
+
+  const buildItemEndpoint = itemId => `${baseEndpoint}/${itemId}`;
+
   const sortInitialItems = items =>
     items.reduce(
       (filteredItems, item) => {
@@ -14,17 +19,29 @@ function Controller(model) {
     );
 
   this.handleGetCurrentItems = async () =>
-    model.getItems().then(sortInitialItems);
+    betterFetch(baseEndpoint).then(sortInitialItems);
 
-  this.handleCreateItem = todoText => {
-    if (!todoText) {
+  this.handleCreateItem = text => {
+    if (!text) {
       throw new Error("ToDo text is empty");
     }
 
-    return model.addItem(todoText);
+    return postJSON(baseEndpoint, { text });
   };
 
-  this.handleCompleteItem = itemId => model.markItemComplete(itemId);
+  this.handleCompleteItem = itemId => {
+    const endpoint = buildItemEndpoint(itemId);
 
-  this.handleDeleteItem = itemId => model.deleteItem(itemId);
+    return betterFetch(endpoint, {
+      method: "PATCH",
+    });
+  };
+
+  this.handleDeleteItem = itemId => {
+    const endpoint = buildItemEndpoint(itemId);
+
+    return betterFetch(endpoint, {
+      method: "DELETE",
+    });
+  };
 }

@@ -1,9 +1,8 @@
-const run = () => {
-  const model = new Model();
-  const controller = new Controller(model);
+const startClient = () => {
+  const controller = new Controller();
   const view = new View(controller);
 
   view.init();
 };
 
-document.addEventListener("DOMContentLoaded", run);
+document.addEventListener("DOMContentLoaded", startClient);
