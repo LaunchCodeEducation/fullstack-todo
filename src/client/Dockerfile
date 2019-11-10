@@ -2,7 +2,7 @@ FROM python
 
 WORKDIR /client
 
-COPY . .
+COPY src/ .
 
 # run python http server to serve static client content
 # -d /directory/to/serve

@@ -5,6 +5,7 @@ function View(controller) {
   const completedList = document.querySelector("#completed-list");
   const incompleteList = document.querySelector("#incomplete-list");
 
+  // can be expanded to check the type of error and render appropriate error messages in the UI
   const handleError = error => console.error({ error });
 
   //-- UTILS --//
@@ -23,7 +24,6 @@ function View(controller) {
   //-- ACTIONS --//
   const addNewItem = clickHandler => {
     const newItemText = createItemTextInput.value;
-    if (!newItemText) return; // exit early if text is empty
 
     controller
       .handleCreateItem(newItemText)

@@ -16,7 +16,13 @@ function Controller(model) {
   this.handleGetCurrentItems = async () =>
     model.getItems().then(sortInitialItems);
 
-  this.handleCreateItem = todoText => model.addItem(todoText);
+  this.handleCreateItem = todoText => {
+    if (!todoText) {
+      throw new Error("ToDo text is empty");
+    }
+
+    return model.addItem(todoText);
+  };
 
   this.handleCompleteItem = itemId => model.markItemComplete(itemId);
 
