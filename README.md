@@ -76,9 +76,9 @@ $ python -m http.server -d src/client/src 3000
 
 # Components
 
-Both the Client (Frontend) and API (Backend) follow an on-the-nose MVC architecture and component design to help illustrate the respective separation of concerns. The Client and API Components are architecturally (served) separately from each other and communicate through HTTP (AJAX) requests. The terms Architecture and Design are defined in this document as follows:
+The Client (Frontend) and API (Backend) use an MVC architecture and a MCVC (modified MVC) design for infrastructure and code structure separation of concerns. In this document Architecture and Design are defined:
 
-> **Architecture** refers to the external infrastructure or how the components of a system are hosted and communicate with each other
+> **Architecture** refers to the external infrastructure or how the components of a system are hosted (served) and communicate with each other
 
 > **Design** refers to the internal structure of a code base and the semantics of how its modules communicate with each other
 
@@ -154,7 +154,7 @@ Using a Client and API MVC architecture "physically" separates the presentation 
 
 > only when a change must be made to either the Frontend AJAX requests or Backend routes and behavior do the two teams need to communicate and agree upon a new contract
 
-# MVC Design
+# MCVC Design
 
 ## Client (Frontend)
 
