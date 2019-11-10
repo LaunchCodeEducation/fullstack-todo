@@ -1,9 +1,10 @@
 const allowCORS = (req, res, next) => {
   res.set("Access-Control-Allow-Origin", "*");
-  res.set("Access-Control-Allow-Headers", "content-type");
-  res.set("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE");
 
   if (req.method === "OPTIONS") {
+    res.set("Access-Control-Allow-Headers", "content-type");
+    res.set("Access-Control-Allow-Methods", "PATCH, DELETE");
+
     return res.sendStatus(200);
   }
 
@@ -25,13 +26,13 @@ const enforceJSON = (req, res, next) => {
   next();
 };
 
-const injectDataHandler = dataHandler => (req, _, next) => {
-  req.dataHandler = dataHandler;
+const injectModel = model => (req, _, next) => {
+  req.model = model;
   next();
 };
 
 module.exports = {
   allowCORS,
   enforceJSON,
-  injectDataHandler,
+  injectModel,
 };
