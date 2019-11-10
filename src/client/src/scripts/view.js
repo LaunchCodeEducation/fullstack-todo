@@ -36,11 +36,11 @@ function View(controller) {
       .catch(handleError);
   };
 
-  const moveItemToCompletedList = itemButton =>
+  const moveItemToCompletedList = (itemButton, clickHandler) =>
     controller
       .handleCompleteItem(itemButton.id)
       .then(updatedItem => {
-        updateItemButton(updatedItem, itemButton);
+        configureItemActionButton(updatedItem, itemButton, clickHandler);
 
         const itemComponent = getItemComponent(itemButton);
         appendItemToList(itemComponent, completedList);
@@ -63,7 +63,7 @@ function View(controller) {
         event.preventDefault(); // prevent form default behavior
         return addNewItem(handleActionButtonClick);
       case "complete":
-        return moveItemToCompletedList(target);
+        return moveItemToCompletedList(target, handleActionButtonClick);
       case "delete":
         return removeItem(target);
     }
