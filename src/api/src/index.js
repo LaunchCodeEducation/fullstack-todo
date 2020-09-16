@@ -8,6 +8,10 @@ const app = express();
 
 app.use(allowCORS, injectModel(new Model()));
 
+app.get("/health", (_, res) => {
+  res.sendStatus(200);
+});
+
 app.use("/todos", Controller);
 
 const { PORT = 8008 } = process.env;
