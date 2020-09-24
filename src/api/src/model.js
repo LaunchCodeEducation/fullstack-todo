@@ -16,7 +16,12 @@ module.exports = function Model() {
 
   this.getItems = () => store.items;
 
-  this.addItem = itemText => {
+  this.getItem = (itemId) => {
+    const targetItem = store.items.find((item) => item.id === Number(itemId));
+    return targetItem || null;
+  };
+
+  this.addItem = (itemText) => {
     const id = ++store.nextId;
     const newToDo = new ToDo(itemText, id);
 
@@ -25,8 +30,8 @@ module.exports = function Model() {
     return newToDo;
   };
 
-  this.markItemComplete = itemId => {
-    const targetItem = store.items.find(item => item.id === Number(itemId));
+  this.markItemComplete = (itemId) => {
+    const targetItem = store.items.find((item) => item.id === Number(itemId));
     if (!targetItem) {
       throw new Error(`item with id ${itemId} not found`);
     }
@@ -35,7 +40,7 @@ module.exports = function Model() {
     return targetItem;
   };
 
-  this.deleteItem = itemId => {
-    store.items = store.items.filter(item => item.id !== Number(itemId));
+  this.deleteItem = (itemId) => {
+    store.items = store.items.filter((item) => item.id !== Number(itemId));
   };
 };
