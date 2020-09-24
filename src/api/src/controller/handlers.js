@@ -3,6 +3,16 @@ const getToDosHandler = (req, res) => {
   return res.json(model.getItems());
 };
 
+const getToDoHandler = (req, res) => {
+  const {
+    model,
+    params: { id },
+  } = req;
+  const foundItem = model.getItem(id);
+  if (foundItem) return res.json(foundItem);
+  return res.sendStatus(404);
+};
+
 const createToDoHandler = (req, res) => {
   const {
     model,
@@ -50,6 +60,7 @@ const deleteToDoHandler = (req, res) => {
 };
 
 module.exports = {
+  getToDoHandler,
   getToDosHandler,
   createToDoHandler,
   completeToDoHandler,

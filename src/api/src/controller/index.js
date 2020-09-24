@@ -4,6 +4,7 @@ const handlers = require("./handlers");
 const { enforceJSON } = require("../middleware");
 
 const {
+  getToDoHandler,
   getToDosHandler,
   createToDoHandler,
   completeToDoHandler,
@@ -24,6 +25,7 @@ Controller.post("/", enforceJSON, express.json(), createToDoHandler);
 // the route() method is an alternative way to group handlers under a common path
 // it can be used on the Express app as app.route() as well
 Controller.route("/:id")
+  .get(getToDoHandler) // GET /todos/:id
   .delete(deleteToDoHandler) // DELETE /todos/:id
   .patch(completeToDoHandler); // PATCH /todos/:id
 
